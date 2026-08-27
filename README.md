@@ -1,5 +1,5 @@
 MONETIX
-Distributed API Marketplace and Usage-Based Monetization Platform
+Distributed API Marketplace and Usage Based Monetization Platform
 
 PROJECT DESCRIPTION
 
