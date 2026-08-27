@@ -60,7 +60,7 @@ The API Gateway is implemented using C++, Boost.Asio, and Boost.Beast.
 
 It is designed as a high performance asynchronous HTTP gateway and reverse proxy.
 
-The gateway request pipeline is:
+ The gateway request pipeline is:
 
 Client Request
         |
