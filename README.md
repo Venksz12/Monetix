@@ -56,9 +56,9 @@ The system separates synchronous request processing from asynchronous usage proc
 
 3. API GATEWAY
 
-The API Gateway is implemented using C++23, Boost.Asio, and Boost.Beast.
+The API Gateway is implemented using C++, Boost.Asio, and Boost.Beast.
 
-It is designed as a high-performance asynchronous HTTP gateway and reverse proxy.
+It is designed as a high performance asynchronous HTTP gateway and reverse proxy.
 
 The gateway request pipeline is:
 
@@ -129,7 +129,7 @@ User login
 JWT token issuance
 JWT validation
 Password hashing
-Role-based access control
+Role based access control
 Authorization
 
 Passwords are designed to be protected using Argon2id hashing rather than storing plaintext passwords.
@@ -153,11 +153,6 @@ SLA information
 Status
 
 Each API can have multiple versions.
-
-Examples include:
-
-/v1
-/v2
 
 Each version can contain multiple endpoints.
 
