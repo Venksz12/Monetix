@@ -1014,12 +1014,12 @@ Overall, Monetix demonstrates how distributed systems, asynchronous messaging, m
 
 The primary purpose of this project is academic.
 
-It is intended to demonstrate the design and implementation of a distributed system rather than represent a fully certified commercial payment or API-management product.
+It is intended to demonstrate the design and implementation of a distributed system rather than represent a fully certified commercial payment or API management product.
 
-The project can therefore be extended, benchmarked, tested, and modified to study different distributed-system strategies and performance characteristics.
+The project can therefore be extended, benchmarked, tested, and modified to study different distributed system strategies and performance characteristics.
 
 
-38. AUTHOR / PROJECT INFORMATION
+38. PROJECT INFORMATION
 
 Primary Backend Language:
 C++
