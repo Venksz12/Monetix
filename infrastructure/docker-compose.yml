@@ -1,0 +1,75 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: monetix
+      POSTGRES_USER: monetix
+      POSTGRES_PASSWORD: monetix
+    ports: ["5432:5432"]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/001_init.sql:ro
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+  clickhouse:
+    image: clickhouse/clickhouse-server:24.12
+    ports: ["8123:8123","9000:9000"]
+    volumes:
+      - ./clickhouse/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+  nats:
+    image: nats:2.14-alpine
+    command: ["-c","/etc/nats/nats-server.conf"]
+    ports: ["4222:4222","8222:8222"]
+    volumes:
+      - ./nats/nats-server.conf:/etc/nats/nats-server.conf:ro
+      - natsdata:/data
+  gateway:
+    build:
+      context: ..
+      dockerfile: infrastructure/backend.Dockerfile
+    environment:
+      GATEWAY_PORT: 8080
+      UPSTREAM_HOST: ""
+      NATS_URL: nats://nats:4222
+    ports: ["8080:8080"]
+    depends_on: [redis,nats]
+  identity:
+    build: {context: .., dockerfile: infrastructure/backend.Dockerfile}
+    command: ["/src/build/services/monetix_identity"]
+    environment: {SERVICE_PORT: 8081, JWT_SECRET: dev-secret}
+    ports: ["8081:8081"]
+    depends_on: [postgres]
+  marketplace:
+    build: {context: .., dockerfile: infrastructure/backend.Dockerfile}
+    command: ["/src/build/services/monetix_marketplace"]
+    environment: {SERVICE_PORT: 8082}
+    ports: ["8082:8082"]
+    depends_on: [postgres]
+  pricing:
+    build: {context: .., dockerfile: infrastructure/backend.Dockerfile}
+    command: ["/src/build/services/monetix_pricing"]
+    environment: {SERVICE_PORT: 8083}
+    ports: ["8083:8083"]
+  wallet:
+    build: {context: .., dockerfile: infrastructure/backend.Dockerfile}
+    command: ["/src/build/services/monetix_wallet"]
+    environment: {SERVICE_PORT: 8084, WEBHOOK_SECRET: dev-webhook-secret}
+    ports: ["8084:8084"]
+    depends_on: [postgres]
+  metering:
+    build: {context: .., dockerfile: infrastructure/backend.Dockerfile}
+    command: ["/src/build/services/monetix_metering"]
+    environment: {SERVICE_PORT: 8085}
+    ports: ["8085:8085"]
+    depends_on: [postgres,nats]
+  frontend:
+    build: ../frontend
+    environment:
+      NEXT_PUBLIC_GATEWAY_URL: http://localhost:8080
+    ports: ["3000:3000"]
+    depends_on: [gateway]
+
+volumes:
+  pgdata:
+  natsdata:

@@ -1,0 +1,2 @@
+import Link from "next/link";
+export function Nav(){return <nav className="flex items-center justify-between border-b border-zinc-800 px-8 py-4"><Link href="/" className="font-bold">Monetix</Link><div className="flex gap-5 text-sm text-zinc-400"><Link href="/marketplace">Marketplace</Link><Link href="/playground">Playground</Link><Link href="/dashboard/consumer">Consumer</Link><Link href="/dashboard/provider">Provider</Link></div></nav>}

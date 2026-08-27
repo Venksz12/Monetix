@@ -1,0 +1,6 @@
+backend/build/
+frontend/node_modules/
+frontend/.next/
+*.log
+.env
+.DS_Store

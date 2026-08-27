@@ -1,0 +1,15 @@
+find_package(Drogon CONFIG REQUIRED)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(SODIUM REQUIRED libsodium)
+
+function(add_monetix_service target dir)
+    add_executable(${target} ${dir}/main.cpp)
+    target_include_directories(${target} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../common ${SODIUM_INCLUDE_DIRS})
+    target_link_libraries(${target} PRIVATE Drogon::Drogon monetix_common OpenSSL::Crypto Threads::Threads ${SODIUM_LIBRARIES})
+endfunction()
+
+add_monetix_service(monetix_identity identity)
+add_monetix_service(monetix_marketplace marketplace)
+add_monetix_service(monetix_pricing pricing)
+add_monetix_service(monetix_metering metering)
+add_monetix_service(monetix_wallet wallet)
