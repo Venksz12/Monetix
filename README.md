@@ -749,6 +749,7 @@ k6 Load Testing
 
 26. PROJECT STRUCTURE
 
+```text
 monetix/
 |
 +-- backend/
@@ -799,6 +800,8 @@ monetix/
 +-- Makefile
 +-- README.md
 +-- setup.sh
+```
+
 
 
 27. REQUIREMENTS
