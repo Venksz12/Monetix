@@ -799,7 +799,6 @@ monetix/
 |
 +-- Makefile
 +-- README.md
-+-- setup.sh
 ```
 
 
