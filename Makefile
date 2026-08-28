@@ -26,5 +26,3 @@ load:
 clean:
 	rm -rf backend/build frontend/.next
 
-package:
-	./generate_zip.sh
