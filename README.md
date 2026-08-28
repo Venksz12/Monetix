@@ -42,7 +42,7 @@ The overall architecture of Monetix is shown below.
                                v
                     +----------------------+
                     |     NEXT.JS PORTAL    |
-                    | Marketplace /        |
+                    | Marketplace /         |
                     | Dashboard / Playground|
                     +----------+-----------+
                                |
